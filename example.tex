@@ -1,7 +1,9 @@
 \documentclass[submission,copyright,creativecommons]{eptcs}
 \providecommand{\event}{SOS 2007} % Name of the event you are submitting to
-\usepackage{breakurl}             % Not needed if you use pdflatex only.
+% \usepackage{breakurl}           % Not needed if you use pdflatex only.
 \usepackage{underscore}           % Only needed if you use pdflatex.
+
+\usepackage[T1]{fontenc}          % Recommended with pdflatex
 
 \title{An Example of a Paper\\ with a Rather Large Title-to-Content Ratio}
 \author{Rob van Glabbeek
@@ -272,7 +274,7 @@ DOIs of papers can often be found through
   these DOIs can then be incorporated in the final version, together
   with the remaining DOIs that need to found at DBLP or publisher's webpages.}
 the second method {\it Search on article title}, only using the {\bf
-surname} of the first-listed author, works best.  
+surname} of the first-listed author, works best.
 Other places to find DOIs are DBLP and the response pages for cited
 papers (maintained by their publishers).
 
@@ -300,7 +302,7 @@ generated when using {\tt pdflatex}. This problem is repaired when
 invoking \href{http://eptcs.web.cse.unsw.edu.au/breakurl.sty}
 {\tt $\backslash$usepackage$\{$breakurl$\}$}: it allows linebreaking
 within links and yield the same output as obtained by default with
-{\tt pdflatex}. 
+{\tt pdflatex}.
 When invoking {\tt pdflatex}, the package {\tt breakurl} is ignored.
 
 The package {\tt $\backslash$usepackage$\{$underscore$\}$} is
