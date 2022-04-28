@@ -4,9 +4,9 @@ LaTeX style file and formatting instructions.
 
 This repository contains
 
-* the EPTCS LaTeX style file `eptcs.cls`
-* the [EPTCS bibliography style](http://biblio.eptcs.org/) file `eptcs.bst` and its variants,
-* the file `example.tex` with instructions for both, also serving as an example template,
+* the EPTCS LaTeX style file `eptcs.cls`;
+* the default [EPTCS bibliography style](http://biblio.eptcs.org/) file `eptcs.bst` and its variants `eptcsalpha.bst`, `eptcsini.bst`, and `eptcsalphaini.bst`;
+* the file `example.tex` with instructions for both, also serving as an example template;
 * and a bibliography file `generic.bib` that is called from `example.tex`.
 
 **Backwards compatibility:** Files produced with an older version of eptcs.cls will yield the same output when typeset with the current version. (But files produced conform the current instructions may not typeset at all with older versions of eptcs.cls.)
