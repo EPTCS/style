@@ -1,9 +1,14 @@
 \documentclass[submission,copyright,creativecommons]{eptcs}
 \providecommand{\event}{SOS 2007} % Name of the event you are submitting to
-% \usepackage{breakurl}           % Not needed if you use pdflatex only.
-\usepackage{underscore}           % Only needed if you use pdflatex.
 
-\usepackage[T1]{fontenc}          % Recommended with pdflatex
+\usepackage{iftex}
+
+\ifpdf
+  \usepackage{underscore}         % Only needed if you use pdflatex.
+  \usepackage[T1]{fontenc}        % Recommended with pdflatex
+\else
+  \usepackage{breakurl}           % Not needed if you use pdflatex only.
+\fi
 
 \title{An Example of a Paper\\ with a Rather Large Title-to-Content Ratio}
 \author{Rob van Glabbeek
