@@ -197,7 +197,7 @@ FUNCTION {emphasize}
 FUNCTION {slant}
 { duplicate$ empty$
     { pop$ "" }
-    { "{\sl " swap$ * "}" * }
+    { "{\slshape " swap$ * "}" * }
   if$
 }
 FUNCTION {tie.or.space.prefix}

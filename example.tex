@@ -37,27 +37,27 @@ This is the final sentence in the abstract.
 
 \section{Introduction}
 
-The optional arguments of {\tt $\backslash$documentclass$\{$eptcs$\}$} are
+The optional arguments of {\ttfamily $\backslash$documentclass$\{$eptcs$\}$} are
 \begin{itemize}
 \item at most one of
-{\tt adraft},
-{\tt submission} or
-{\tt preliminary},
-\item at most one of {\tt publicdomain} or {\tt copyright},
-\item and optionally {\tt creativecommons},
+{\ttfamily adraft},
+{\ttfamily submission} or
+{\ttfamily preliminary},
+\item at most one of {\ttfamily publicdomain} or {\ttfamily copyright},
+\item and optionally {\ttfamily creativecommons},
   \begin{itemize}
   \item possibly augmented with
     \begin{itemize}
-    \item {\tt noderivs}
-    \item or {\tt sharealike},
+    \item {\ttfamily noderivs}
+    \item or {\ttfamily sharealike},
     \end{itemize}
-  \item and possibly augmented with {\tt noncommercial}.
+  \item and possibly augmented with {\ttfamily noncommercial}.
   \end{itemize}
 \end{itemize}
-We use {\tt adraft} rather than {\tt draft} so as not to confuse hyperref.
-The style-file option {\tt submission} is for papers that are
-submitted to {\tt $\backslash$event}, where the value of the latter is
-to be filled in in line 2 of the tex-file. Use {\tt preliminary} only
+We use {\ttfamily adraft} rather than {\ttfamily draft} so as not to confuse hyperref.
+The style-file option {\ttfamily submission} is for papers that are
+submitted to {\ttfamily $\backslash$event}, where the value of the latter is
+to be filled in in line 2 of the tex-file. Use {\ttfamily preliminary} only
 for papers that are accepted but not yet published. The final version
 of your paper that is to be uploaded at the EPTCS website should have
 none of these style-file options.
@@ -67,27 +67,27 @@ By means of the style-file option
 authors equip their paper with a Creative Commons license that allows
 everyone to copy, distribute, display, and perform their copyrighted
 work and derivative works based upon it, but only if they give credit
-the way you request. By invoking the additional style-file option {\tt
+the way you request. By invoking the additional style-file option {\ttfamily
 noderivs} you let others copy, distribute, display, and perform only
 verbatim copies of your work, but not derivative works based upon
-it. Alternatively, the {\tt sharealike} option allows others to
+it. Alternatively, the {\ttfamily sharealike} option allows others to
 distribute derivative works only under a license identical to the
 license that governs your work. Finally, you can invoke the option
-{\tt noncommercial} that let others copy, distribute, display, and
+{\ttfamily noncommercial} that let others copy, distribute, display, and
 perform your work and derivative works based upon it for
 noncommercial purposes only.
 
 Authors' (multiple) affiliations and emails use the commands
-{\tt $\backslash$institute} and {\tt $\backslash$email}.
+{\ttfamily $\backslash$institute} and {\ttfamily $\backslash$email}.
 Both are optional.
 Authors should moreover supply
-{\tt $\backslash$titlerunning} and {\tt $\backslash$authorrunning},
+{\ttfamily $\backslash$titlerunning} and {\ttfamily $\backslash$authorrunning},
 and in case the copyrightholders are not the authors also
-{\tt $\backslash$copyrightholders}.
+{\ttfamily $\backslash$copyrightholders}.
 As illustrated above, heuristic solutions may be called for to share
 affiliations. Authors may apply their own creativity here \cite{multipleauthors}.
 
-EPTCS recommends using {\tt $\backslash$documentclass[copyright,creativecommons]\{eptcs\}}.\\
+EPTCS recommends using {\ttfamily $\backslash$documentclass[copyright,creativecommons]\{eptcs\}}.\\
 Additionally, the title should be set in \href{https://en.wikipedia.org/wiki/Title_case}{title case},
 meaning that major words start with a capital letter, and only articles, prepositions and
 conjunctions appear in lower case.
@@ -229,23 +229,23 @@ nature of the ancillary files, as in
 \section{Prefaces}
 
 Volume editors may create prefaces using this very template,
-with {\tt $\backslash$title$\{$Preface$\}$} and {\tt $\backslash$author$\{\}$}.
+with {\ttfamily $\backslash$title$\{$Preface$\}$} and {\ttfamily $\backslash$author$\{\}$}.
 
 \section{Bibliography}
 
 We request that you use
 \href{http://eptcs.web.cse.unsw.edu.au/eptcs.bst}
-{\tt $\backslash$bibliographystyle$\{$eptcs$\}$}
+{\ttfamily $\backslash$bibliographystyle$\{$eptcs$\}$}
 \cite{bibliographystylewebpage}, or one of its variants
 \href{http://eptcs.web.cse.unsw.edu.au/eptcsalpha.bst}{eptcsalpha},
 \href{http://eptcs.web.cse.unsw.edu.au/eptcsini.bst}{eptcsini} or
 \href{http://eptcs.web.cse.unsw.edu.au/eptcsalphaini.bst}{eptcsalphaini}
 \cite{bibliographystylewebpage}. Compared to the original {\LaTeX}
-{\tt $\backslash$biblio\-graphystyle$\{$plain$\}$},
-it ignores the field {\tt month}, and uses the extra
-bibtex fields {\tt eid}, {\tt doi}, {\tt eprint} and {\tt url}.
+{\ttfamily $\backslash$biblio\-graphystyle$\{$plain$\}$},
+it ignores the field {\ttfamily month}, and uses the extra
+bibtex fields {\ttfamily eid}, {\ttfamily doi}, {\ttfamily eprint} and {\ttfamily url}.
 The first is for electronic identifiers (typically the number $n$
-indicating the $n^{\rm th}$ paper in an issue) of papers in electronic
+indicating the $n^\mathrm{th}$ paper in an issue) of papers in electronic
 journals that do not use page numbers. The other three are to refer,
 with life links, to electronic incarnations of the paper.
 
@@ -253,12 +253,12 @@ with life links, to electronic incarnations of the paper.
 
 Almost all publishers use digital object identifiers (DOIs) as a
 persistent way to locate electronic publications. Prefixing the DOI of
-any paper with {\tt https://doi.org/} yields a URI that resolves to the
+any paper with {\ttfamily https://doi.org/} yields a URI that resolves to the
 current location (URL) of the response page\footnote{Nowadays, papers
   that are published electronically tend
   to have a \emph{response page} that lists the title, authors and
   abstract of the paper, and links to the actual manifestations of
-  the paper (e.g.\ as {\tt dvi}- or {\tt pdf}-file). Sometimes
+  the paper (e.g.\ as {\ttfamily dvi}- or {\ttfamily pdf}-file). Sometimes
   publishers charge money to access the paper itself, but the response
   page is always freely available.}
 of that paper. When the location of the response page changes (for
@@ -267,69 +267,69 @@ the same and (through an update by the publisher) the corresponding
 URI will then resolve to the new location. For that reason a reference
 ought to contain the DOI of a paper, with a life link to the corresponding
 URI, rather than a direct reference or link to the current URL of
-publisher's response page. This is the r\^ole of the bibtex field {\tt doi}.
-{\bf EPTCS requires the inclusion of a DOI in each cited paper, when available.}
+publisher's response page. This is the r\^ole of the bibtex field {\ttfamily doi}.
+{\bfseries EPTCS requires the inclusion of a DOI in each cited paper, when available.}
 
 DOIs of papers can often be found through
 \url{http://www.crossref.org/guestquery};\footnote{For papers that will appear
   in EPTCS and use \href{http://eptcs.web.cse.unsw.edu.au/eptcs.bst}
-  {\tt $\backslash$bibliographystyle$\{$eptcs$\}$} there is no need to
+  {\ttfamily $\backslash$bibliographystyle$\{$eptcs$\}$} there is no need to
   find DOIs on this website, as EPTCS will look them up for you
   automatically upon submission of a first version of your paper;
   these DOIs can then be incorporated in the final version, together
   with the remaining DOIs that need to found at DBLP or publisher's webpages.}
-the second method {\it Search on article title}, only using the {\bf
+the second method {\itshape Search on article title}, only using the {\bfseries
 surname} of the first-listed author, works best.
 Other places to find DOIs are DBLP and the response pages for cited
 papers (maintained by their publishers).
 
-\paragraph{The bibtex fields {\tt eprint} and {\tt url}}
+\paragraph{The bibtex fields {\ttfamily eprint} and {\ttfamily url}}
 
 Often an official publication is only available against payment, but
 as a courtesy to readers that do not wish to pay, the authors also
 make the paper available free of charge at a repository such as
 \url{arXiv.org}. In such a case it is recommended to also refer and
 link to the URL of the response page of the paper in such a
-repository.  This can be done using the bibtex fields {\tt eprint}
-or {\tt url}.  The latter field should \textbf{not} be used
-to duplicate information that is also provided through {\tt doi} or {\tt eprint}.
+repository.  This can be done using the bibtex fields {\ttfamily eprint}
+or {\ttfamily url}.  The latter field should \textbf{not} be used
+to duplicate information that is also provided through {\ttfamily doi} or {\ttfamily eprint}.
 You can find archival-quality URL's for most recently published papers
-in DBLP, but please suppress repetition of DOI or {\tt eprint} information though {\tt url}.
+in DBLP, but please suppress repetition of DOI or {\ttfamily eprint} information though {\ttfamily url}.
 In fact, it is often useful to check your references against DBLP records anyway,
 or just find them there in the first place.
 
 \paragraph{Typesetting DOIs and URLs}
 
-When using {\LaTeX} rather than {\tt pdflatex} to typeset your paper, by
+When using {\LaTeX} rather than {\ttfamily pdflatex} to typeset your paper, by
 default no linebreaking within long URLs is allowed. This leads often
 to very ugly output, that moreover is different from the output
-generated when using {\tt pdflatex}. This problem is repaired when
+generated when using {\ttfamily pdflatex}. This problem is repaired when
 invoking \href{http://eptcs.web.cse.unsw.edu.au/breakurl.sty}
-{\tt $\backslash$usepackage$\{$breakurl$\}$}: it allows linebreaking
+{\ttfamily $\backslash$usepackage$\{$breakurl$\}$}: it allows linebreaking
 within links and yield the same output as obtained by default with
-{\tt pdflatex}.
-When invoking {\tt pdflatex}, the package {\tt breakurl} is ignored.
+{\ttfamily pdflatex}.
+When invoking {\ttfamily pdflatex}, the package {\ttfamily breakurl} is ignored.
 
-The package {\tt $\backslash$usepackage$\{$underscore$\}$} is
+The package {\ttfamily $\backslash$usepackage$\{$underscore$\}$} is
 recommended to deal with underscores in DOIs. This is not needed when
-using {\tt $\backslash$usepackage$\{$breakurl$\}$} and not {\tt pdflatex}.
+using {\ttfamily $\backslash$usepackage$\{$breakurl$\}$} and not {\ttfamily pdflatex}.
 
 \paragraph{References to papers in the same EPTCS volume}
 
 To refer to another paper in the same volume as your own contribution,
 use a bibtex entry with
 \begin{center}
-  {\tt series    = $\{\backslash$thisvolume$\{5\}\}$},
+  {\ttfamily series    = $\{\backslash$thisvolume$\{5\}\}$},
 \end{center}
 where 5 is the submission number of the paper you want to cite.
 You may need to contact the author, volume editors or EPTCS staff to
 find that submission number; it becomes known (and unchangeable)
 as soon as the cited paper is first uploaded at EPTCS\@.
-Furthermore, omit the fields {\tt publisher} and {\tt volume}.
+Furthermore, omit the fields {\ttfamily publisher} and {\ttfamily volume}.
 Then in your main paper you put something like:
 
 \noindent
-{\small \tt $\backslash$providecommand$\{\backslash$thisvolume$\}$[1]$\{$this
+{\small \ttfamily $\backslash$providecommand$\{\backslash$thisvolume$\}$[1]$\{$this
   volume of EPTCS, Open Publishing Association$\}$}
 
 \noindent
@@ -337,26 +337,26 @@ This acts as a placeholder macro-expansion until EPTCS software adds
 something like
 
 \noindent
-{\small \tt $\backslash$newcommand$\{\backslash$thisvolume$\}$[1]%
+{\small \ttfamily $\backslash$newcommand$\{\backslash$thisvolume$\}$[1]%
   $\{\{\backslash$eptcs$\}$ 157$\backslash$opa, pp 45--56, doi:\dots$\}$},
 
 \noindent
 where the relevant numbers are pulled out of the database at publication time.
-Here the newcommand wins from the providecommand, and {\tt \small $\backslash$eptcs}
-resp.\ {\tt \small $\backslash$opa} expand to
+Here the newcommand wins from the providecommand, and {\ttfamily \small $\backslash$eptcs}
+resp.\ {\ttfamily \small $\backslash$opa} expand to
 
 \noindent
-{\small \tt $\backslash$sl Electronic Proceedings in Theoretical Computer Science} \hfill and\\
-{\small \tt , Open Publishing Association} \hfill .
+{\small \ttfamily $\backslash$sl Electronic Proceedings in Theoretical Computer Science} \hfill and\\
+{\small \ttfamily , Open Publishing Association} \hfill .
 
 \noindent
-Hence putting {\small \tt $\backslash$def$\backslash$opa$\{\}$} in
+Hence putting {\small \ttfamily $\backslash$def$\backslash$opa$\{\}$} in
 your paper suppresses the addition of a publisher upon expansion of the citation by EPTCS\@.
 An optional argument like
 \begin{center}
-  {\tt series    = $\{\backslash$thisvolume[EPTCS]$\{5\}\}$},
+  {\ttfamily series    = $\{\backslash$thisvolume[EPTCS]$\{5\}\}$},
 \end{center}
-overwrites the value of {\tt \small $\backslash$eptcs}.
+overwrites the value of {\ttfamily \small $\backslash$eptcs}.
 
 \nocite{*}
 \bibliographystyle{eptcs}

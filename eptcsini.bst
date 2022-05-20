@@ -7,7 +7,7 @@
 %% merlin.mbs  (with options: `vonx,ed-au,dt-beg,yr-par,xmth,yrp-col,tit-it,atit-u,volp-com,jwdpg,pp-last,num-xser,ser-vol,jnm-x,pre-edn,doi,blknt,pp,xedn,amper,and-xcom,etal-xc,url,url-blk,bibinfo,nfss,')
 %% ----------------------------------------
 %% *** Stylefile for EPTCS ***
-%% 
+%%
 %% Copyright 1994-2004 Patrick W Daly
  % ===============================================================
  % NOTICE:
@@ -183,7 +183,7 @@ FUNCTION {emphasize}
 FUNCTION {slant}
 { duplicate$ empty$
     { pop$ "" }
-    { "{\sl " swap$ * "}" * }
+    { "{\slshape " swap$ * "}" * }
   if$
 }
 FUNCTION {tie.or.space.prefix}

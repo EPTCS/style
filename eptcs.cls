@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{eptcs}[2020/12/20 v1.6]
+\ProvidesClass{eptcs}[2022/05/20 v1.7]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%                             options                            %%%%
@@ -84,8 +84,8 @@
     \else
       \providecommand{\publicationstatus}{To appear in EPTCS.}
     \fi\fi\fi
-    \providecommand{\titlerunning}{Please define {\tt $\backslash$titlerunning}}
-    \providecommand{\authorrunning}{Please define {\tt $\backslash$authorrunning}}
+    \providecommand{\titlerunning}{Please define {\ttfamily $\backslash$titlerunning}}
+    \providecommand{\authorrunning}{Please define {\ttfamily $\backslash$authorrunning}}
     \providecommand{\copyrightholders}{\authorrunning}
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
     \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
@@ -165,7 +165,7 @@
   %\vskip 2em%				a bit of space removed (< 2em)
   \begin{center}%
   \let \footnote \thanks
-    {\LARGE\bf \@title \par}%		\bf added
+    {\LARGE\bfseries \@title \par}%		\bf added
     \vskip 2em%				was: 1.5em
     {\large
       \lineskip .5em%
@@ -188,7 +188,7 @@
 \newcommand{\institute}[1]{\IfArrayPackageLoaded
     {\\{\scriptsize\begin{tabular}[t]{@{}>{\footnotesize}c@{}}#1\end{tabular}}}
     {\\{\scriptsize\begin{tabular}[t]{@{\footnotesize}c@{}}#1\end{tabular}}}}
-\newcommand{\email}[1]{\\{\footnotesize\tt #1}}
+\newcommand{\email}[1]{\\{\footnotesize\ttfamily #1}}
 
 \renewenvironment{abstract}{\begin{list}{}%   header removed and noindent
 			{\rightmargin\leftmargin
