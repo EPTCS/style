@@ -14,6 +14,7 @@
  % This bibliographic style (bst) file has been generated from one or
  % more master bibliographic style (mbs) files, listed above.
  % Subsequently it has been edited by hand by Rob van Glabbeek
+ % and Kartik Singhal
  %
  % This file can be redistributed and/or modified under the terms
  % of the LaTeX Project Public License Distributed from CTAN
