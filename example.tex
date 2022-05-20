@@ -18,8 +18,8 @@ University of New South Wales\thanks{A fine university.}\\
 Sydney, Australia}
 \email{rvg@cs.stanford.edu}
 \and
-Co Author \qquad\qquad Yet S. Else
-\institute{Stanford Univeristy\\
+Co-Author \qquad\qquad Yet S. Else
+\institute{Stanford University\\
 California, USA}
 \email{\quad is@gmail.com \quad\qquad somebody@else.org}
 }
@@ -57,9 +57,9 @@ The optional arguments of {\ttfamily $\backslash$documentclass$\{$eptcs$\}$} are
 We use {\ttfamily adraft} rather than {\ttfamily draft} so as not to confuse hyperref.
 The style-file option {\ttfamily submission} is for papers that are
 submitted to {\ttfamily $\backslash$event}, where the value of the latter is
-to be filled in in line 2 of the tex-file. Use {\ttfamily preliminary} only
+to be filled in line 2 of the tex file. Use {\ttfamily preliminary} only
 for papers that are accepted but not yet published. The final version
-of your paper that is to be uploaded at the EPTCS website should have
+of your paper that is to be uploaded to the EPTCS website should have
 none of these style-file options.
 
 By means of the style-file option
@@ -258,15 +258,15 @@ current location (URL) of the response page\footnote{Nowadays, papers
   that are published electronically tend
   to have a \emph{response page} that lists the title, authors and
   abstract of the paper, and links to the actual manifestations of
-  the paper (e.g.\ as {\ttfamily dvi}- or {\ttfamily pdf}-file). Sometimes
+  the paper (e.g.\ as {\ttfamily dvi} or {\ttfamily pdf} file). Sometimes
   publishers charge money to access the paper itself, but the response
   page is always freely available.}
 of that paper. When the location of the response page changes (for
 instance through a merge of publishers), the DOI of the paper remains
 the same and (through an update by the publisher) the corresponding
-URI will then resolve to the new location. For that reason a reference
-ought to contain the DOI of a paper, with a life link to the corresponding
-URI, rather than a direct reference or link to the current URL of
+URI will then resolve to the new location. For that reason, a reference
+ought to contain the DOI of a paper, with a live link to the corresponding
+URI, rather than a direct reference or link to the current URL of the
 publisher's response page. This is the r\^ole of the bibtex field {\ttfamily doi}.
 {\bfseries EPTCS requires the inclusion of a DOI in each cited paper, when available.}
 
@@ -275,9 +275,9 @@ DOIs of papers can often be found through
   in EPTCS and use \href{http://eptcs.web.cse.unsw.edu.au/eptcs.bst}
   {\ttfamily $\backslash$bibliographystyle$\{$eptcs$\}$} there is no need to
   find DOIs on this website, as EPTCS will look them up for you
-  automatically upon submission of a first version of your paper;
+  automatically upon submission of the first version of your paper;
   these DOIs can then be incorporated in the final version, together
-  with the remaining DOIs that need to found at DBLP or publisher's webpages.}
+  with the remaining DOIs that need to be found at DBLP or the publisher's web pages.}
 the second method {\itshape Search on article title}, only using the {\bfseries
 surname} of the first-listed author, works best.
 Other places to find DOIs are DBLP and the response pages for cited
@@ -322,11 +322,11 @@ use a bibtex entry with
   {\ttfamily series    = $\{\backslash$thisvolume$\{5\}\}$},
 \end{center}
 where 5 is the submission number of the paper you want to cite.
-You may need to contact the author, volume editors or EPTCS staff to
+You may need to contact the author, volume editors, or EPTCS staff to
 find that submission number; it becomes known (and unchangeable)
 as soon as the cited paper is first uploaded at EPTCS\@.
 Furthermore, omit the fields {\ttfamily publisher} and {\ttfamily volume}.
-Then in your main paper you put something like:
+Then in your main paper, you put something like:
 
 \noindent
 {\small \ttfamily $\backslash$providecommand$\{\backslash$thisvolume$\}$[1]$\{$this
