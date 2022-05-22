@@ -59,10 +59,10 @@ The style-file option {\ttfamily submission} is for papers that are
 submitted to {\ttfamily $\backslash$event}, where the value of the latter is
 to be filled in in line 2 of the tex file. Use {\ttfamily preliminary} only
 for papers that are accepted but not yet published. The final version
-of your paper that is to be uploaded to the EPTCS website should have
+of your paper to be uploaded to the EPTCS website should have
 none of these style-file options.
 
-By means of the style-file option
+Using the style-file option
 \href{http://creativecommons.org/licenses/}{creativecommons}
 authors equip their paper with a Creative Commons license that allows
 everyone to copy, distribute, display, and perform their copyrighted
@@ -218,8 +218,8 @@ We will spare you the details.
 \section{Ancillary files}
 
 Authors may upload ancillary files to be linked alongside their paper.
-These can for instance contain raw data for tables and plots in the
-article, or program code.  Ancillary files are included with an EPTCS
+These can, for instance, contain raw data for tables and plots in the
+article or program code.  Ancillary files are included with an EPTCS
 submission by placing them in a directory \texttt{anc} next to the
 main latex file. See also \url{https://arxiv.org/help/ancillary_files}.
 Please add a file README in the directory \texttt{anc}, explaining the
@@ -258,11 +258,11 @@ current location (URL) of the response page\footnote{Nowadays, papers
   that are published electronically tend
   to have a \emph{response page} that lists the title, authors and
   abstract of the paper, and links to the actual manifestations of
-  the paper (e.g.\ as {\ttfamily dvi} or {\ttfamily pdf} file). Sometimes
+  the paper (e.g., as {\ttfamily dvi} or {\ttfamily pdf} file). Sometimes
   publishers charge money to access the paper itself, but the response
   page is always freely available.}
 of that paper. When the location of the response page changes (for
-instance through a merge of publishers), the DOI of the paper remains
+instance, through a merge of publishers), the DOI of the paper remains
 the same and (through an update by the publisher) the corresponding
 URI will then resolve to the new location. For that reason, a reference
 ought to contain the DOI of a paper, with a live link to the corresponding
@@ -276,24 +276,24 @@ DOIs of papers can often be found through
   {\ttfamily $\backslash$bibliographystyle$\{$eptcs$\}$} there is no need to
   find DOIs on this website, as EPTCS will look them up for you
   automatically upon submission of the first version of your paper;
-  these DOIs can then be incorporated in the final version, together
+  these DOIs can then be incorporated into the final version, together
   with the remaining DOIs that need to be found at DBLP or the publisher's web pages.}
 the second method {\itshape Search on article title}, only using the {\bfseries
-surname} of the first-listed author, works best.
+surname} of the first-listed author works best.
 Other places to find DOIs are DBLP and the response pages for cited
 papers (maintained by their publishers).
 
 \paragraph{The bibtex fields {\ttfamily eprint} and {\ttfamily url}}
 
-Often an official publication is only available against payment, but
+Often an official publication is only available against payment. However,
 as a courtesy to readers that do not wish to pay, the authors also
 make the paper available free of charge at a repository such as
-\url{arXiv.org}. In such a case it is recommended to also refer and
+\url{arXiv.org}. In such a case, it is also recommended to refer and
 link to the URL of the response page of the paper in such a
 repository.  This can be done using the bibtex fields {\ttfamily eprint}
 or {\ttfamily url}.  The latter field should \textbf{not} be used
 to duplicate information that is also provided through {\ttfamily doi} or {\ttfamily eprint}.
-You can find archival-quality URL's for most recently published papers
+You can find archival-quality URLs for most recently published papers
 in DBLP, but please suppress repetition of DOI or {\ttfamily eprint} information though {\ttfamily url}.
 In fact, it is often useful to check your references against DBLP records anyway,
 or just find them there in the first place.
@@ -301,11 +301,11 @@ or just find them there in the first place.
 \paragraph{Typesetting DOIs and URLs}
 
 When using {\LaTeX} rather than {\ttfamily pdflatex} to typeset your paper, by
-default no linebreaking within long URLs is allowed. This leads often
+default no line breaks within long URLs are allowed. This leads often
 to very ugly output, that moreover is different from the output
 generated when using {\ttfamily pdflatex}. This problem is repaired when
 invoking \href{http://eptcs.web.cse.unsw.edu.au/breakurl.sty}
-{\ttfamily $\backslash$usepackage$\{$breakurl$\}$}: it allows linebreaking
+{\ttfamily $\backslash$usepackage$\{$breakurl$\}$}: it allows line breaks
 within links and yield the same output as obtained by default with
 {\ttfamily pdflatex}.
 When invoking {\ttfamily pdflatex}, the package {\ttfamily breakurl} is ignored.
