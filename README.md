@@ -1,6 +1,9 @@
 # EPTCS LaTeX Style
 
-LaTeX style file and formatting instructions.
+[![Overleaf Template](https://img.shields.io/badge/Overleaf-Template-success?logo=overleaf)](https://www.overleaf.com/latex/templates/electronic-proceedings-in-theoretical-computer-science-eptcs-latex-style/bqxvmywxdcwh)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/EPTCS/style)](https://github.com/EPTCS/style/releases)
+
+LaTeX style file and formatting instructions. The style distribution is also available on [Overleaf](https://www.overleaf.com/latex/templates/electronic-proceedings-in-theoretical-computer-science-eptcs-latex-style/bqxvmywxdcwh).
 
 This repository contains
 
