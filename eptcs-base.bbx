@@ -1,6 +1,6 @@
 % Copyright © 2026 Niels C. Vooijs
 \ProvidesFile{eptcs-base.bbx}
-[2026/05/06 EPTCS biblatex base bibliography style]
+[2026/05/26 EPTCS biblatex base bibliography style]
 
 \RequirePackage{numname}
 
@@ -54,11 +54,14 @@
     \renewrobustcmd*{\mkbibordinal}[1]{\ordinaltoname{#1}}
 }
 
+% do abbreviate pages and define new bibstrings
 \NewBibliographyString{availableat}
 \NewBibliographyString{translated}
 \DefineBibliographyStrings{english}{
     availableat = {available at},
     translated = {translated},
+    page = {p\adddot},
+    pages = {pp\adddot},
 }
 
 % customize field formats
@@ -116,6 +119,26 @@
 \newbibmacro*{begentry}{}
 \newbibmacro*{finentry}{\finentry}
 
+% the authors a bibliographic entry:
+% for collection-like entries this is the editors,
+% for article/incollection-like and thesis entries this is the authors,
+% for book-like non-thesis entries this is the authors, or, if undefined, the editors
+
+\newbibmacro*{entryauthor}[1]{%
+    \ifstrequal{#1}{booklike}{%
+        \usebibmacro{author/editor+others}%
+    }{}%
+    \ifstrequal{#1}{collectionlike}{%
+        \usebibmacro{editor+others}%
+    }{}%
+    \ifstrequal{#1}{incollectionlike}{%
+        \usebibmacro{author}%
+    }{}%
+    \ifstrequal{#1}{thesis}{%
+        \usebibmacro{author}%
+    }{}%
+}
+
 \renewbibmacro*{title}{%
     \printtext[title]{%
     \iffieldundef{subtitle}
@@ -130,7 +153,7 @@
     % \printfield{titleaddon}%
 }
 
-\renewbibmacro*{journaltitle}{%
+\newbibmacro*{journaltitle}{%
     \printtext[journaltitle]{%
     \iffieldundef{journalsubtitle}
         {\printfield[titlecase]{journaltitle}}
@@ -154,8 +177,8 @@
     }%
 }
 
-\newbibmacro*{author+year+title}{%
-    \usebibmacro{author/editor+others}%
+\newbibmacro*{author+year+title}[1][booklike]{%
+    \usebibmacro{entryauthor}{#1}%
     \setunit{\addspace}
     \printtext[parens]{\usebibmacro{date}}%
     \setunit{\addcolon\addspace}
@@ -182,7 +205,7 @@
         {\setunit{\bibeidpunct}\printfield{eid}}%
 }
 
-\newbibmacro*{url}{%
+\renewbibmacro*{url}{%
     \ifthenelse {
         \iffieldundef{eprinttype}
         \and
@@ -265,7 +288,7 @@
 \DeclareBibliographyDriver{article}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
-    \usebibmacro{author+year+title}%
+    \usebibmacro{author+year+title}[incollectionlike]%
     \newunitblock
     \usebibmacro{journal+issue+pages/eid}%
     \newunit
@@ -275,10 +298,10 @@
     \usebibmacro{finentry}%
 }
 
-\DeclareBibliographyDriver{inproceedings}{%
+\DeclareBibliographyDriver{incollection}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
-    \usebibmacro{author+year+title}%
+    \usebibmacro{author+year+title}[incollectionlike]%
     \newunitblock
     \printtext{In\addspace}%
     \usebibmacro{editor}%
@@ -297,13 +320,15 @@
     \usebibmacro{notes}%
     \usebibmacro{finentry}%
 }
-\DeclareBibliographyAlias{inbook}{inproceedings}
-\DeclareBibliographyAlias{incollection}{inproceedings}
+\DeclareBibliographyAlias{inbook}{incollection}
+\DeclareBibliographyAlias{bookinbook}{inbook}
+\DeclareBibliographyAlias{inproceedings}{incollection}
+\DeclareBibliographyAlias{inreference}{incollection}
 
 \DeclareBibliographyDriver{book}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
-    \usebibmacro{author+year+title}%
+    \usebibmacro{author+year+title}[booklike]%
     \newunit
     \printfield{edition}%
     \newunitblock
@@ -319,22 +344,43 @@
     \usebibmacro{finentry}%
 }
 \DeclareBibliographyAlias{mvbook}{book}
-\DeclareBibliographyAlias{proceedings}{book}
-\DeclareBibliographyAlias{mvproceedings}{book}
 
-\DeclareBibliographyDriver*{%
+\DeclareBibliographyDriver{collection}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
-    \printtext{Unsupported type.}%
+    \usebibmacro{author+year+title}[collectionlike]%
+    \newunit
+    \printfield{edition}%
     \newunitblock
-    \usebibmacro{author+year+title}%
+    \usebibmacro{series+number}%
+    \newunit
+    \usebibmacro{proceedings-organization}%
+    \newunit
+    \usebibmacro{publisher+location}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
     \usebibmacro{finentry}%
 }
+\DeclareBibliographyAlias{mvcollection}{collection}
+\DeclareBibliographyAlias{proceedings}{collection}
+\DeclareBibliographyAlias{mvproceedings}{mvcollection}
+\DeclareBibliographyAlias{reference}{collection}
+\DeclareBibliographyAlias{mvreference}{mvcollection}
 
 \DeclareBibliographyDriver{report}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
-    \usebibmacro{author+year+title}%
+    \ifentrytype{thesis}{%
+        \usebibmacro{author+year+title}[thesis]%
+    }{%
+        \usebibmacro{author+year+title}[booklike]%
+    }
+    \newunit
+    \ifentrytype{manual}
+        {\printfield{edition}}
+        {}%
     \newunitblock
     \printfield{type}%
     \ifentrytype{report}
@@ -345,7 +391,9 @@
         {}%
     \newunitblock
     \newunit
-    \usebibmacro{institution+location}%
+    \ifentrytype{manual}
+        {\printfield{organization}}
+        {\usebibmacro{institution+location}}%
     \newunit
     \usebibmacro{doi+eprint+url}%
     \newunitblock
@@ -372,5 +420,15 @@
 \DeclareBibliographyAlias{booklet}{misc}
 \DeclareBibliographyAlias{online}{misc}
 \DeclareBibliographyAlias{unpublished}{misc}
+
+
+\DeclareBibliographyDriver*{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \printtext{Unsupported type.}%
+    \newunitblock
+    \usebibmacro{author+year+title}%
+    \usebibmacro{finentry}%
+}
 
 \endinput
