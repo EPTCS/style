@@ -281,7 +281,8 @@
             }
                 {%
                     \BibliographyWarning{series given but number undefined, falling back to volume}%
-                    \printfield{volume}%
+                    % apply `number` field formatting to `volume`
+                    \printfield[number]{volume}%
                 }
                 {}%
         }%
@@ -500,14 +501,42 @@
 \DeclareBibliographyAlias{online}{misc}
 \DeclareBibliographyAlias{unpublished}{misc}
 
-
-\DeclareBibliographyDriver*{%
+\DeclareBibliographyDriver{software}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
-    \printtext{Unsupported type.}%
-    \newunitblock
     \usebibmacro{author+year+title}%
+    \newunit
+    \printfield{version}%
+    \newunitblock
+    \printlist{organization}%
+    \newunit
+    \printlist{publisher}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \printfield{type}%
+    \newunit
+    \usebibmacro{notes}%
     \usebibmacro{finentry}%
 }
+
+\DeclareBibliographyDriver{dataset}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}%
+    \newunit
+    \printfield{version}%
+    \newunitblock
+    \usebibmacro{publisher+location}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+
+% if no driver exists we fall back to `@misc`
+% biblatex issues a warning itself, so no need for us to do so
+\DeclareBibliographyAlias{*}{misc}
 
 \endinput
