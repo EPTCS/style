@@ -87,20 +87,20 @@
 }
 
 % field formats for the different eprint types
-\newcommand*{\DeclareEprintFieldFormat}[4]{
+\newcommand*{\DeclareEprintFieldFormat}[4]{%
     \DeclareFieldFormat{eprint:#1}{%
         #2\bibeprintpunct%
-        \ifboolexpr{ test {\ifhyperref} and #4 }
+        \ifboolexpr{ test {\ifhyperref} and #4 }%
             {%
                 \href{#3{##1}}{%
                     \nolinkurl{##1}%
-                    \setunit{\bibeprintpunct}
+                    \setunit{\bibeprintpunct}%
                     \printfield[eprintclass:#1]{eprintclass}%
                 }%
-            }
-            {
+            }%
+            {%
                 \nolinkurl{##1}%
-                \setunit{\bibeprintpunct}
+                \setunit{\bibeprintpunct}%
                 \printfield[eprintclass:#1]{eprintclass}%
             }%
     }%
