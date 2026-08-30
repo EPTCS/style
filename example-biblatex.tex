@@ -1,0 +1,172 @@
+\documentclass[submission,copyright,creativecommons]{eptcs}
+\providecommand{\event}{SOS 2007} % Name of the event you are submitting to
+
+\usepackage{iftex}
+
+\ifpdf
+  \usepackage{underscore}         % Only needed if you use pdflatex.
+  \usepackage[T1]{fontenc}        % Recommended with pdflatex
+\else
+  \usepackage{breakurl}           % Not needed if you use pdflatex only.
+\fi
+
+\title{An EPTCS Example with BibLaTeX Bibliography}
+\author{Rob van Glabbeek
+\institute{NICTA\\ Sydney, Australia}
+\institute{School of Computer Science and Engineering\\
+University of New South Wales\thanks{A fine university.}\\
+Sydney, Australia}
+\email{rvg@cs.stanford.edu}
+\and
+Co Author \qquad\qquad Yet S. Else
+\institute{Stanford University\\
+California, USA}
+\email{\quad is@gmail.com \quad\qquad somebody@else.org}
+}
+
+\newcommand{\titlerunning}{A Longtitled Paper}
+\newcommand{\authorrunning}{R.J. van Glabbeek, C. Author \& Y.S. Else}
+
+\hypersetup{
+  bookmarksnumbered,
+  pdftitle    = {\titlerunning},
+  pdfauthor   = {\authorrunning},
+  pdfsubject  = {EPTCS},               % Consider adding a more appropriate subject or description
+  % pdfkeywords = {keyword1, keyword2} % Uncomment and enter keywords specific to your paper
+}
+
+% For the biblatex bibliography:
+% * specify `bibstyle=eptcs-numeric`
+% * for automatically abbreviating given names by initials, use `giveninits` or `giveninits=true`
+\usepackage[bibstyle=eptcs-numeric,giveninits]{biblatex}
+% and load your bibliography database file with `\addbibresource`
+\addbibresource{generic-biblatex.bib}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    This EPTCS template shows how to use Bib{\LaTeX} instead of Bib{\TeX}.
+    Regarding other matters, see the main example file.
+\end{abstract}
+
+Currently, with Bib{\LaTeX}, only a numeric bibliography style is supported.
+
+\section{The Preamble}
+
+In the preamble, load the \texttt{biblatex} package with the option \texttt{bibstyle=eptcs-numeric}.
+Optionally, the option \texttt{giveninits} can be given, in which case the given names of authors and editors are automatically abbreviated to initials.
+For example, the command for loading biblatex could look as follows:
+\begin{center}\ttfamily
+    {\textbackslash}usepackage[bibstyle=eptcs-numeric,giveninits]\{biblatex\}
+\end{center}
+Next, specify the bibliography database file with \texttt{{\textbackslash}addbibresource}.
+
+\section{The Bibliography}
+
+In the document, you can use the cite commands provided by biblatex, e.g.\@ \texttt{{\textbackslash}cite} and \texttt{{\textbackslash}textcite}.
+At the point where you want to insert the bibliography, use \texttt{{\textbackslash}printbibliography}.
+
+\section{The Bibliography Database File}
+
+Please follow the biblatex datamodel.
+However, note that not all fields documented in the biblatex manual are supported yet, so check the output of a {\LaTeX} compile.
+
+\paragraph{DOIs}
+
+Almost all publishers use digital object identifiers (DOIs) as a
+persistent way to locate electronic publications. Prefixing the DOI of
+any paper with {\ttfamily https://doi.org/} yields a URI that resolves to the
+current location (URL) of the response page\footnote{Nowadays, papers
+  that are published electronically tend
+  to have a \emph{response page} that lists the title, authors and
+  abstract of the paper, and links to the actual manifestations of
+  the paper (e.g., as {\ttfamily dvi} or {\ttfamily pdf} file). Sometimes
+  publishers charge money to access the paper itself, but the response
+  page is always freely available.}
+of that paper. When the location of the response page changes (for
+instance, through a merge of publishers), the DOI of the paper remains
+the same and (through an update by the publisher) the corresponding
+URI will then resolve to the new location. For that reason, a reference
+ought to contain the DOI of a paper, with a live link to the corresponding
+URI, rather than a direct reference or link to the current URL of the
+publisher's response page. This is the r\^ole of the biblatex field {\ttfamily doi}.
+{\bfseries EPTCS requires the inclusion of a DOI in each cited paper, when available.}
+
+DOIs of papers can often be found through
+\url{https://www.crossref.org/guestquery};\footnote{For papers that will appear
+  in EPTCS and use \href{https://eptcs.web.cse.unsw.edu.au/eptcs.bst}
+  {\ttfamily $\backslash$bibliographystyle$\{$eptcs$\}$} there is no need to
+  find DOIs on this website, as EPTCS will look them up for you
+  automatically upon submission of the first version of your paper;
+  these DOIs can then be incorporated into the final version, together
+  with the remaining DOIs that need to be found at DBLP or the publisher's web pages.}
+the second method {\itshape Search on article title}, only using the {\bfseries
+surname} of the first-listed author, works best.
+Other places to find DOIs are DBLP and the response pages for cited
+papers (maintained by their publishers).
+
+\paragraph{The fields {\ttfamily eprint} and {\ttfamily url}}
+
+Often an official publication is only available against payment. However,
+as a courtesy to readers that do not wish to pay, the authors also
+make the paper available free of charge at a repository such as
+\url{arXiv.org}. In such a case, it is recommended to also refer and
+link to the URL of the response page of the paper in such a
+repository.  This can be done using the biblatex fields {\ttfamily eprint} and \texttt{eprinttype}.
+The biblatex bibliography style supports, among others, the eprinttypes arxiv and jstor.
+If no supported eprint is available, the field {\ttfamily url} can be used.
+This field should \textbf{not} be used to duplicate information that is also provided through
+{\ttfamily doi} or {\ttfamily eprint}. You can find archival-quality URLs for most recently
+published papers in DBLP, but please suppress repetition of DOI or {\ttfamily eprint} information
+through {\ttfamily url}. In fact, it is often useful to check your references against DBLP records anyway,
+or just find them there in the first place.
+
+\paragraph{References to papers in the same EPTCS volume}
+
+To refer to another paper in the same volume as your own contribution,
+use a bibtex entry with
+\begin{center}
+  {\ttfamily series    = $\{\backslash$thisvolume$\{5\}\}$},
+\end{center}
+where 5 is the submission number of the paper you want to cite.
+You may need to contact the author, volume editors, or EPTCS staff to
+find that submission number; it becomes known (and unchangeable)
+as soon as the cited paper is first uploaded at EPTCS\@.
+Furthermore, omit the fields {\ttfamily publisher} and {\ttfamily volume}.
+Then in your main paper, you put something like:
+
+\noindent
+{\small \ttfamily $\backslash$providecommand$\{\backslash$thisvolume$\}$[1]$\{$this
+  volume of EPTCS, Open Publishing Association$\}$}
+
+\noindent
+This acts as a placeholder macro-expansion until EPTCS software adds
+something like
+
+\noindent
+{\small \ttfamily $\backslash$newcommand$\{\backslash$thisvolume$\}$[1]%
+  $\{\{\backslash$eptcs$\}$ 157$\backslash$opa, pp 45--56, doi:\dots$\}$},
+
+\noindent
+where the relevant numbers are pulled out of the database at publication time.
+Here the newcommand wins from the providecommand, and {\ttfamily \small $\backslash$eptcs}
+resp.\ {\ttfamily \small $\backslash$opa} expand to
+
+\noindent
+{\small \ttfamily $\backslash$sl Electronic Proceedings in Theoretical Computer Science} \hfill and\\
+{\small \ttfamily , Open Publishing Association} \hfill .
+
+\noindent
+Hence putting {\small \ttfamily $\backslash$def$\backslash$opa$\{\}$} in
+your paper suppresses the addition of a publisher upon expansion of the citation by EPTCS\@.
+An optional argument like
+\begin{center}
+  {\ttfamily series    = $\{\backslash$thisvolume[EPTCS]$\{5\}\}$},
+\end{center}
+overwrites the value of {\ttfamily \small $\backslash$eptcs}.
+
+\nocite{*}
+% Use `\printbibliography` at the point where you want to include the bibliography in your document
+\printbibliography
+\end{document}

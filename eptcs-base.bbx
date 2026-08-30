@@ -1,0 +1,542 @@
+% Copyright © 2026 Niels C. Vooijs
+\ProvidesFile{eptcs-base.bbx}
+[2026/06/08 EPTCS biblatex base bibliography style]
+
+\RequirePackage{numname}
+
+\newtoggle{bbx:isbn}
+\newtoggle{bbx:url}
+\newtoggle{bbx:doi}
+\newtoggle{bbx:eprint}
+\newtoggle{bbx:related}
+\newtoggle{bbx:publisher-location}
+\newtoggle{bbx:institution-location}
+\newtoggle{bbx:organization-location}
+\newtoggle{bbx:series-volume-fallback}
+\toggletrue{bbx:series-volume-fallback}
+
+\newcommand*{\bibdoitext}{doi\addcolon}
+
+\DeclareBiblatexOption{global,type,entry}[boolean]{isbn}[true]{%
+  \settoggle{bbx:isbn}{#1}}
+\DeclareBiblatexOption{global,type,entry}[boolean]{url}[true]{%
+  \settoggle{bbx:url}{#1}}
+\DeclareBiblatexOption{global,type,entry}[boolean]{doi}[true]{%
+  \settoggle{bbx:doi}{#1}}
+\DeclareBiblatexOption{global,type,entry}[boolean]{eprint}[true]{%
+  \settoggle{bbx:eprint}{#1}}
+\DeclareBiblatexOption{global,type,entry}[boolean]{related}[true]{%
+  \settoggle{bbx:related}{#1}}
+\DeclareBiblatexOption{global,type,entry}[boolean]{location}[true]{%
+  \settoggle{bbx:publisher-location}{#1}%
+  \settoggle{bbx:institution-location}{#1}%
+  \settoggle{bbx:organization-location}{#1}%
+}
+
+\ExecuteBibliographyOptions{isbn,url,doi,eprint,related,location}
+% @online url is shown even if url=false, globally
+\ExecuteBibliographyOptions[online]{url=true}
+
+% customize package options
+\ExecuteBibliographyOptions{sorting=nyt,date=year,abbreviate=false,maxbibnames=10000}
+
+% customize bibliography font
+\renewrobustcmd*{\bibfont}{\small}
+
+% customize delimiters
+\renewrobustcmd*{\newunitpunct}{\addcomma\addspace}
+\newrobustcmd*{\newunitblock}{\setunit{\addperiod\addspace}\newblock}
+\newrobustcmd*{\bibeprintpunct}{\addcolon}
+\newrobustcmd*{\bibeprintclassdelim}{\addspace}
+\renewrobustcmd*{\finalnamedelim}{\addspace\&\addspace}
+\renewrobustcmd*{\bibeidpunct}{\addcolon}
+\renewrobustcmd*{\bibinitdelim}{\addnbthinspace}
+\renewrobustcmd*{\subtitlepunct}{\addcomma\addspace}
+
+% customize ordinal rendering: "second edition" instead of "2nd edition"
+\DefineBibliographyExtras{english}{
+    \renewrobustcmd*{\mkbibordinal}[1]{\ordinaltoname{#1}}
+}
+
+% do abbreviate pages and define new bibstrings
+\NewBibliographyString{availableat}
+\NewBibliographyString{translated}
+\DefineBibliographyStrings{english}{
+    availableat = {available at},
+    translated = {translated},
+    page = {p\adddot},
+    pages = {pp\adddot},
+}
+
+% customize field formats
+\DeclareFieldFormat*{title}{\textit{#1}}
+\DeclareFieldFormat*{booktitle}{\textsl{#1}}
+\DeclareFieldFormat*{journaltitle}{\textsl{#1}}
+\DeclareFieldFormat*{series}{\textsl{#1}}
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{doi}{%
+    \bibdoitext\addcolon%
+    \ifhyperref
+        {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+        {\nolinkurl{#1}}%
+}
+\DeclareFieldFormat{chapter}{%
+    \ifnumeral{#1}
+        {\bibstring{chapter}~#1}
+        {#1\isdot}%
+}
+
+% field formats for the different eprint types
+\newcommand*{\DeclareEprintFieldFormat}[4]{
+    \DeclareFieldFormat{eprint:#1}{%
+        #2\bibeprintpunct%
+        \ifboolexpr{ test {\ifhyperref} and #4 }
+            {%
+                \href{#3{##1}}{%
+                    \nolinkurl{##1}%
+                    \setunit{\bibeprintpunct}
+                    \printfield[eprintclass:#1]{eprintclass}%
+                }%
+            }
+            {
+                \nolinkurl{##1}%
+                \setunit{\bibeprintpunct}
+                \printfield[eprintclass:#1]{eprintclass}%
+            }%
+    }%
+}
+\newrobustcmd*{\mkeprinturl}[1]{\thefield{url}}
+\newrobustcmd*{\mkarxivurl}[1]{https://arxiv.org/\abx@arxivpath/#1}
+\newrobustcmd*{\mkhdlurl}[1]{https://hdl.handle.net/#1}
+\newrobustcmd*{\mkjstorurl}[1]{https://www.jstor.org/stable/#1}
+\newrobustcmd*{\mkpubmedurl}[1]{https://www.ncbi.nlm.nih.gov/pubmed/#1}
+\newrobustcmd*{\mkgooglebooksurl}[1]{https://books.google.com/books?id=#1}
+
+\DeclareEprintFieldFormat{}{eprint}{\mkeprinturl}{ not test{\iffieldundef{url}} }
+\DeclareEprintFieldFormat{arxiv}{arXiv}{\mkarxivurl}{ bool{true} }
+\DeclareEprintFieldFormat{hdl}{HDL}{\mkhdlurl}{ bool{true} }
+\DeclareEprintFieldFormat{jstor}{JSTOR}{\mkjstorurl}{ bool{true} }
+\DeclareEprintFieldFormat{pubmed}{PMID}{\mkpubmedurl}{ bool{true} }
+\DeclareEprintFieldFormat{googlebooks}{Google Books}{\mkgooglebooksurl}{ bool{true} }
+
+\DeclareFieldFormat{eprintclass:}{\mkbibparens{#1}}
+\DeclareFieldFormat{eprintclass:arxiv}{\mkbibbrackets{#1}}
+\DeclareFieldAlias{eprintclass:hdl}{eprintclass}
+\DeclareFieldAlias{eprintclass:jstor}{eprintclass}
+\DeclareFieldAlias{eprintclass:pubmed}{eprintclass}
+\DeclareFieldAlias{eprintclass:googlebooks}{eprintclass}
+
+\newbibmacro*{begentry}{}
+\newbibmacro*{finentry}{\finentry}
+\newbibmacro*{missing-field}{\printtext[bold]{??}}
+
+% the authors a bibliographic entry:
+% for collection-like entries this is the editors,
+% for article/incollection-like and thesis entries this is the authors,
+% for book-like non-thesis entries this is the authors, or, if undefined, the editors
+
+\newbibmacro*{entryauthor}[1]{%
+    \usebibmacro{entryauthor:#1}%
+}
+
+\newbibmacro*{entryauthor:booklike}{%
+    \ifboolexpr {
+        test {\ifnameundef{author}}
+        and
+        test {\ifnameundef{editor}}
+    }
+        {\BibliographyWarning{entry requires author or editor}\usebibmacro{missing-field}}
+        {}%
+    \usebibmacro{author/editor+others}%
+}
+\newbibmacro*{entryauthor:collectionlike}{%
+    \ifnameundef{editor}
+        {\BibliographyWarning{collectionlike entry requires editor}\usebibmacro{missing-field}}
+        {}%
+    \usebibmacro{editor+others}%
+}
+\newbibmacro*{entryauthor:incollectionlike}{%
+    \ifnameundef{author}
+        {\BibliographyWarning{incollectionlike entry requires author}\usebibmacro{missing-field}}
+        {}%
+    \usebibmacro{author}%
+}
+\newbibmacro*{entryauthor:thesis}{%
+    \ifnameundef{author}
+        {\BibliographyWarning{thesis entry requires author}\usebibmacro{missing-field}}
+        {}%
+    \usebibmacro{author}%
+}
+
+\renewbibmacro*{title}{%
+    \printtext[title]{%
+    \iffieldundef{subtitle}
+        {\printfield[titlecase]{title}}
+        {%
+            \printfield[titlecase]{title}%
+            \setunit{\subtitlepunct}%
+            \printfield[titlecase]{subtitle}%
+        }%
+    }%
+    % \newunit
+    % \printfield{titleaddon}%
+}
+
+\newbibmacro*{journaltitle}{%
+    \printtext[journaltitle]{%
+    \iffieldundef{journalsubtitle}
+        {\printfield[titlecase]{journaltitle}}
+        {%
+            \printfield[titlecase]{journaltitle}%
+            \setunit{\subtitlepunct}%
+            \printfield[titlecase]{journalsubtitle}%
+        }%
+    }%
+}
+
+\renewbibmacro*{booktitle}{%
+    \printtext[booktitle]{%
+    \iffieldundef{booksubtitle}
+        {\printfield[titlecase]{booktitle}}
+        {%
+            \printfield[titlecase]{booktitle}%
+            \setunit{\subtitlepunct}%
+            \printfield[titlecase]{booksubtitle}%
+        }%
+    }%
+}
+
+\newbibmacro*{author+year+title}[1][booklike]{%
+    \usebibmacro{entryauthor}{#1}%
+    \setunit{\addspace}
+    \printtext[parens]{\usebibmacro{date}}%
+    \setunit{\addcolon\addspace}
+    \usebibmacro{title}%
+}
+
+\newbibmacro*{in+editor+booktitle}{%
+    \printtext{In\addspace}%
+    \usebibmacro{editor}%
+    \setunit{\addcolon\addspace}
+    \usebibmacro{booktitle}%
+}
+
+\newbibmacro*{volume+number}{%
+    \printfield{volume}%
+    \iffieldundef{number}
+        {}
+        {\printtext[parens]{\printfield{number}}}%
+}
+
+\newbibmacro*{journal+issue}{%
+    \usebibmacro{journaltitle}%
+    \setunit{\addspace}%
+    \usebibmacro{volume+number}%
+}
+
+\newbibmacro*{journal+issue+pages/eid}{%
+    \usebibmacro{journal+issue}%
+    \iffieldundef{eid}
+        {\setunit{\bibpagespunct}\printfield{pages}}
+        {\setunit{\bibeidpunct}\printfield{eid}}%
+}
+
+\renewbibmacro*{url}{%
+    \ifthenelse {
+        \iffieldundef{eprinttype}
+        \and
+        \not\iffieldundef{url}
+    }
+        {\printtext{\bibstring{availableat}~\printfield{url}}}
+        {}%
+}
+
+\newbibmacro*{doi+eprint+url}{%
+    \iftoggle{bbx:doi}
+        {\printfield{doi}}
+        {}%
+    \newunitblock
+    \iftoggle{bbx:eprint}
+        {\usebibmacro{eprint}}
+        {}%
+    \newunitblock
+    \iftoggle{bbx:url}
+        {\usebibmacro{url}}
+        {}%
+}
+
+\newbibmacro*{series+number}{%
+    \iffieldundef{series}
+        {}
+        {
+            \printfield{series}%
+            \setunit{\addspace}
+            \printfield{number}%
+            \ifboolexpr {
+                togl {bbx:series-volume-fallback}
+                and
+                test {\iffieldundef{number}}
+                and
+                not test {\iffieldundef{volume}}
+            }
+                {%
+                    \BibliographyWarning{series given but number undefined, falling back to volume}%
+                    % apply `number` field formatting to `volume`
+                    \printfield[number]{volume}%
+                }
+                {}%
+        }%
+}
+
+\newbibmacro*{proceedings-organization}{%
+    \ifthenelse{
+        \ifentrytype{inproceedings}
+        \or
+        \ifentrytype{proceedings}
+        \or
+        \ifentrytype{mvproceedings}
+    }
+        {\printlist{organization}}
+        {}%
+}
+
+\newbibmacro*{publisher+location}{%
+    \iflistundef{publisher}
+        {}
+        {
+            \printlist{publisher}%
+            \iftoggle{bbx:publisher-location}
+                {\newunit\printlist{location}}
+                {}%
+        }%
+}
+
+\newbibmacro*{institution+location}{%
+    \iflistundef{institution}
+        {}
+        {
+            \printlist{institution}%
+            \iftoggle{bbx:institution-location}
+                {\newunit\printlist{location}}
+                {}%
+        }%
+}
+
+\newbibmacro*{organization+location}{%
+    \iflistundef{organization}
+        {}
+        {
+            \printlist{organization}%
+            \iftoggle{bbx:organization-location}
+                {\newunit\printlist{location}}
+                {}%
+        }%
+}
+
+\newbibmacro*{notes}{%
+    \printlist{language}%
+    \newunit
+    \iflistundef{origlanguage}
+        {}
+        {%
+            \ifnameundef{translator}
+                {\printtext{\bibstring{translated}\addspace\printlist[lfromoriglanguage]{origlanguage}}}
+                {\printtext{\bibstring{bytranslator}\addspace\printnames{translator}}}%
+        }%
+    \newunitblock
+    \printfield{note}%
+}
+
+\DeclareBibliographyDriver{article}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}[incollectionlike]%
+    \newunitblock
+    \usebibmacro{journal+issue+pages/eid}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{incollection}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}[incollectionlike]%
+    \newunitblock
+    \usebibmacro{in+editor+booktitle}%
+    \newunit
+    \printfield{edition}%
+    \newunit
+    \usebibmacro{series+number}%
+    \newunit
+    \usebibmacro{publisher+location}%
+    \newunit
+    \printfield{chapter}%
+    \setunit{\bibpagespunct}\printfield{pages}%
+    \newunitblock
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+\DeclareBibliographyAlias{inbook}{incollection}
+\DeclareBibliographyAlias{bookinbook}{inbook}
+\DeclareBibliographyAlias{inreference}{incollection}
+
+\DeclareBibliographyDriver{inproceedings}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}[incollectionlike]%
+    \newunitblock
+    \usebibmacro{in+editor+booktitle}%
+    \newunit
+    \usebibmacro{series+number}%
+    \newunit
+    \usebibmacro{proceedings-organization}%
+    \newunit
+    \usebibmacro{publisher+location}%
+    \setunit{\bibpagespunct}\printfield{pages}%
+    \newunitblock
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{book}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}[booklike]%
+    \newunit
+    \printfield{edition}%
+    \newunitblock
+    \usebibmacro{series+number}%
+    \newunit
+    \usebibmacro{proceedings-organization}%
+    \newunit
+    \usebibmacro{publisher+location}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+\DeclareBibliographyAlias{mvbook}{book}
+
+\DeclareBibliographyDriver{collection}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}[collectionlike]%
+    \newunit
+    \printfield{edition}%
+    \newunitblock
+    \usebibmacro{series+number}%
+    \newunit
+    \usebibmacro{proceedings-organization}%
+    \newunit
+    \usebibmacro{publisher+location}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+\DeclareBibliographyAlias{mvcollection}{collection}
+\DeclareBibliographyAlias{proceedings}{collection}
+\DeclareBibliographyAlias{mvproceedings}{mvcollection}
+\DeclareBibliographyAlias{reference}{collection}
+\DeclareBibliographyAlias{mvreference}{mvcollection}
+
+\DeclareBibliographyDriver{report}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \ifentrytype{thesis}{%
+        \usebibmacro{author+year+title}[thesis]%
+    }{%
+        \usebibmacro{author+year+title}[booklike]%
+    }
+    \newunit
+    \ifentrytype{manual}
+        {\printfield{edition}}
+        {}%
+    \newunitblock
+    \printfield{type}%
+    \ifentrytype{report}
+        {%
+            \setunit{\addspace}
+            \printfield{number}%
+        }
+        {}%
+    \newunitblock
+    \newunit
+    \ifentrytype{manual}
+        {\usebibmacro{organization+location}}
+        {\usebibmacro{institution+location}}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+\DeclareBibliographyAlias{thesis}{report}
+\DeclareBibliographyAlias{manual}{report}
+
+\DeclareBibliographyDriver{misc}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}%
+    \newunitblock
+    \printfield{type}%
+    \newunit
+    \printfield{howpublished}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+\DeclareBibliographyAlias{booklet}{misc}
+\DeclareBibliographyAlias{online}{misc}
+\DeclareBibliographyAlias{unpublished}{misc}
+
+\DeclareBibliographyDriver{software}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}%
+    \newunit
+    \printfield{version}%
+    \newunitblock
+    \printlist{organization}%
+    \newunit
+    \printlist{publisher}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \printfield{type}%
+    \newunit
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+
+\DeclareBibliographyDriver{dataset}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author+year+title}%
+    \newunit
+    \printfield{version}%
+    \newunitblock
+    \usebibmacro{publisher+location}%
+    \newunit
+    \usebibmacro{doi+eprint+url}%
+    \newunitblock
+    \usebibmacro{notes}%
+    \usebibmacro{finentry}%
+}
+
+% if no driver exists we fall back to `@misc`
+% biblatex issues a warning itself, so no need for us to do so
+\DeclareBibliographyAlias{*}{misc}
+
+\endinput

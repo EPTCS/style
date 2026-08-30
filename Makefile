@@ -2,9 +2,10 @@
 
 all:
 	latexmk -pdf example.tex
+	latexmk -pdf example-biblatex.tex
 
 clean:
 	latexmk -C
 
 dist: clean
-	zip eptcsstyle.zip generic.bib eptcs.cls *.bst example.tex
+	zip eptcsstyle.zip *.bib eptcs.cls *.bst *.bbx example.tex example-biblatex.tex
