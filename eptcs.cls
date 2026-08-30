@@ -111,17 +111,7 @@
   \global\let\date\relax
   \global\let\and\relax
 }
-\def\@maketitle{%                       adapted from article.cls
-  \newpage
-\noindent
-\raisebox{-22.8cm}[0pt][0pt]{\footnotesize
-\begin{tabular}{@{}l}
-\publicationstatus
-\end{tabular}}
-\hfill\vspace{-1em}
-\raisebox{-22.8cm}[0pt][0pt]{\footnotesize
-\makebox[0pt][r]{
-\begin{tabular}{l@{}}
+\def\@eptcscopyright{%
 \ifpublicdomain
   This work is \href{https://creativecommons.org/publicdomain/zero/1.0/}
   {dedicated to the public domain}.
@@ -160,6 +150,20 @@
     \fi
   \fi
 \fi
+}
+
+\def\@maketitle{%                       adapted from article.cls
+  \newpage
+\noindent
+\raisebox{-22.8cm}[0pt][0pt]{\footnotesize
+\begin{tabular}{@{}l}
+\publicationstatus
+\end{tabular}}
+\hfill\vspace{-1em}
+\raisebox{-22.8cm}[0pt][0pt]{\footnotesize
+\makebox[0pt][r]{
+\begin{tabular}{l@{}}
+\@eptcscopyright
 \end{tabular}}}
   \null
   %\vskip 2em%				a bit of space removed (< 2em)
