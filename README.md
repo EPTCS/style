@@ -10,8 +10,9 @@ This repository contains
 
 * the EPTCS LaTeX style file `eptcs.cls`;
 * the default [EPTCS bibliography style](https://biblio.eptcs.org/) file `eptcs.bst` and its variants `eptcsalpha.bst`, `eptcsini.bst`, and `eptcsalphaini.bst`;
-* the file `example.tex` with instructions for both, also serving as an example template;
-* and a bibliography file `generic.bib` that is called from `example.tex`.
+* the BibLaTeX style files `eptcs-numeric.bbx` and `eptcs-base.bbx`;
+* the files `example.tex` and `example-biblatex.tex` with instructions and example templates for BibTeX and BibLaTeX;
+* and the bibliography files `generic.bib` and `generic-biblatex.bib`.
 
 **Backwards compatibility:** Files produced with an older version of eptcs.cls will yield the same output when typeset with the current version. (But files produced conform the current instructions may not typeset at all with older versions of eptcs.cls.)
 
